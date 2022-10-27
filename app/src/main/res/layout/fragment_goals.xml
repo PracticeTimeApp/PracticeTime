@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.goals.GoalsFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/goalsAppbar"
+        style="@style/AppBar">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar_layout"
+            style="@style/CollapsingToolbar"
+            app:title="@string/navigationGoalsTitle"
+            app:toolbarId="@+id/goalsToolbar">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/goalsToolbar"
+                style="@style/Toolbar"
+                app:menu="@menu/goals_toolbar_menu_base" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/goalList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="12dp"
+            android:paddingBottom="80dp"
+            tools:listitem="@layout/listitem_goal"
+            tools:itemCount="3"/>
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/goalsFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:src="@android:drawable/ic_input_add"
+        android:transitionName="transition_fab"
+        android:contentDescription="@string/new_goal_fab" />
+
+    <TextView
+        android:id="@+id/goalsHint"
+        style="@style/tv_hint_empty_fragment"
+        android:text="@string/goalsFragmentHint"
+        tools:visibility="visible" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
