@@ -3,7 +3,7 @@ Open source code for Android application PracticeTime!
 https://play.google.com/store/apps/details?id=de.practicetime.practicetime
 
 ###### Product Owner:
-https://github.com/PracticeTimeApp
+https://github.com/PracticeTimeApp (Javier Carbone)
 
 ###### Lead Developers:
 https://github.com/matthiasemde
