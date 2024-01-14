@@ -12,8 +12,11 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -47,17 +50,31 @@ class MainActivity : AppCompatActivity() {
 
         if (BuildConfig.DEBUG) {
             createDatabaseFirstRun()
-//            launchAppIntroFirstRun()
         }
         setTheme()
     }
 
-    private fun launchAppIntroFirstRun() {
-        if (!prefs.getBoolean(PracticeTime.PREFERENCES_KEY_APPINTRO_DONE, false)) {
-            val i = Intent(this, AppIntroActivity::class.java)
-            i.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
-            startActivity(i)
+    private fun launchAppIntro() {
+        val i = Intent(this, AppIntroActivity::class.java)
+        i.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+        startActivity(i)
+    }
+
+    private fun announceUpdate(
+        @LayoutRes layout: Int,
+        onConfirm: () -> Unit
+    ) {
+        val builder = AlertDialog.Builder(this).apply {
+            setCancelable(false)
+            setView(this@MainActivity.layoutInflater.inflate(layout, null))
+            setPositiveButton("Awesome!") { _, _ -> onConfirm() }
         }
+        val dialog = builder.create()
+
+        dialog.window?.setBackgroundDrawable(
+            ContextCompat.getDrawable(this, R.drawable.dialog_background)
+        )
+        dialog.show()
     }
 
     private fun createDatabaseFirstRun() {
@@ -94,8 +111,21 @@ class MainActivity : AppCompatActivity() {
     // periodically check if session is still running (if it is) to remove the badge if yes
     override fun onResume() {
         super.onResume()
-        if (!BuildConfig.DEBUG)
-            launchAppIntroFirstRun()
+
+        if (!BuildConfig.DEBUG) {
+            if (!prefs.getBoolean(PracticeTime.PREFERENCES_KEY_APPINTRO_DONE, false)) {
+                // make sure the update message is not shown after app intro
+                prefs.edit().putBoolean(PracticeTime.PREFERENCES_KEY_UPDATE_1_1_0, true).apply()
+
+                launchAppIntro()
+            }
+            if (!prefs.getBoolean(PracticeTime.PREFERENCES_KEY_UPDATE_1_1_0, false)) {
+                announceUpdate(layout = R.layout.dialog_announce_update_1_1_0) {
+                    prefs.edit().putBoolean(PracticeTime.PREFERENCES_KEY_UPDATE_1_1_0, true).apply()
+                }
+            }
+        }
+
         runnable = object : Runnable {
             override fun run() {
                 if (PracticeTime.serviceIsRunning) {

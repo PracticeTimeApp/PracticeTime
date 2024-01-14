@@ -10,7 +10,12 @@ package de.practicetime.practicetime.ui.sessionlist
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import android.os.*
+import android.os.Build
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.VibrationEffect
+import android.os.VibratorManager
 import android.util.TypedValue
 import android.view.View
 import android.widget.TextView
@@ -30,7 +35,7 @@ import de.practicetime.practicetime.ui.activesession.ActiveSessionActivity
 import kotlinx.coroutines.Runnable
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.util.*
+import java.util.Calendar
 
 class SessionListFragment : Fragment(R.layout.fragment_sessions_list) {
 
@@ -308,12 +313,8 @@ class SessionListFragment : Fragment(R.layout.fragment_sessions_list) {
     private fun resetToolbar() {
         sessionListToolbar.apply {
             menu?.clear()
-            setCommonToolbar(requireActivity(), this) {
-//                Place menu item click handler here
-//                when(it) {
-//                }
-            }
             inflateMenu(R.menu.sessions_list_menu_base)
+            setCommonToolbar(requireActivity(), this) { }
             navigationIcon = null
         }
         sessionListCollapsingToolbarLayout.background = null

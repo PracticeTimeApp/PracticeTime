@@ -10,12 +10,22 @@ package de.practicetime.practicetime.database
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
 import android.util.Log
-import androidx.room.*
-import androidx.room.migration.AutoMigrationSpec
+import androidx.room.Database
+import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
-import androidx.sqlite.db.*
-import de.practicetime.practicetime.database.daos.*
-import de.practicetime.practicetime.database.entities.*
+import androidx.sqlite.db.SupportSQLiteDatabase
+import androidx.sqlite.db.SupportSQLiteQueryBuilder
+import de.practicetime.practicetime.database.daos.CategoryDao
+import de.practicetime.practicetime.database.daos.GoalDescriptionDao
+import de.practicetime.practicetime.database.daos.GoalInstanceDao
+import de.practicetime.practicetime.database.daos.SectionDao
+import de.practicetime.practicetime.database.daos.SessionDao
+import de.practicetime.practicetime.database.entities.Category
+import de.practicetime.practicetime.database.entities.GoalDescription
+import de.practicetime.practicetime.database.entities.GoalDescriptionCategoryCrossRef
+import de.practicetime.practicetime.database.entities.GoalInstance
+import de.practicetime.practicetime.database.entities.Section
+import de.practicetime.practicetime.database.entities.Session
 import de.practicetime.practicetime.utils.getCurrTimestamp
 
 @Database(
@@ -36,6 +46,18 @@ abstract class PTDatabase : RoomDatabase() {
     abstract val goalInstanceDao : GoalInstanceDao
     abstract val sessionDao : SessionDao
     abstract val sectionDao : SectionDao
+
+    suspend fun validate(): Boolean {
+        return try {
+            val isDatabaseEmpty = listOf(categoryDao.getAll(), goalDescriptionDao.getAll(), goalInstanceDao.getAll(), sessionDao.getAll(), sectionDao.getAll()).all {
+                it.isEmpty()
+            }
+            !isDatabaseEmpty
+        } catch (e: Exception) {
+            Log.e("PTDatabase", "Validation failed:  ${e.javaClass.simpleName}: ${e.message}")
+            false
+        }
+    }
 }
 
 object PTDatabaseMigrationOneToTwo : Migration(1,2) {
