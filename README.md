@@ -2,14 +2,6 @@
 Open source code for Android application PracticeTime!
 https://play.google.com/store/apps/details?id=de.practicetime.practicetime
 
-###### Product Owner:
-https://github.com/PracticeTimeApp (Javier Carbone)
-
-###### Lead Developers:
-https://github.com/matthiasemde
-
-https://github.com/mipro98
-
 ## App Description
 Boost your practice! Practice Time! helps you while practicing your instrument with time tracking and other smart features.
 This music practice app is designed to be a musician’s tool for everyday practice and help you in improving your habits. All you need in one app!
