@@ -12,8 +12,7 @@
     android:id="@+id/coordinator_layout_active_session"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:transitionName="transition_fab"
-    android:fitsSystemWindows="true">
+    android:transitionName="transition_fab">
 
     <LinearLayout
         android:id="@+id/ll_active_session"
@@ -184,7 +183,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout_Bottom_btn"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
+        android:minHeight="56dp"
         android:layout_gravity="bottom|left"
         android:animateLayoutChanges="true"
         android:background="?android:attr/navigationBarColor"

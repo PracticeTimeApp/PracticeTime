@@ -10,8 +10,7 @@
     android:id="@+id/activity_main_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity"
-    android:fitsSystemWindows="true">
+    tools:context=".ui.MainActivity">
 
 
     <androidx.fragment.app.FragmentContainerView
