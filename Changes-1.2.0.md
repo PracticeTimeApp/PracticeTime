@@ -37,6 +37,7 @@ Resolved layout collisions where app content overlapped with system UI elements 
     *   Modified `activity_active_session.xml` and `activity_fullscreen_session.xml` bottom button bars.
     *   *Change:* Switched height from fixed `56dp` to `wrap_content` with a `minHeight` of `56dp`.
     *   *Reason:* Prevents buttons from being cut off or "squashed" when navigation handle padding is applied.
+    *   *Update:* Dynamically adjusted margins for main content and pause overlays in `ActiveSessionActivity` to perfectly align with the new dynamic bar height.
 
 ## 4. Git Maintenance
 *   **`.gitignore` Improvements**: Added `/release` and `/keystore` to the exclusion lists.
