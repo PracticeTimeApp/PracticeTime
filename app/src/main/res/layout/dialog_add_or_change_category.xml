@@ -140,6 +140,7 @@
         android:layout_height="36dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
         android:orientation="horizontal">
 
         <Space
@@ -213,6 +214,197 @@
 
         <RadioButton
             android:id="@+id/addCategoryDialogColor10"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:background="@drawable/background_color_radio_btn"
+            android:buttonTint="@android:color/white"
+            android:gravity="center"
+            android:scaleX="1.5"
+            android:scaleY="1.5" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/addCategoryDialogColorRow3"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:id="@+id/addCategoryDialogColor11"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:background="@drawable/background_color_radio_btn"
+            android:buttonTint="@android:color/white"
+            android:gravity="center"
+            android:scaleX="1.5"
+            android:scaleY="1.5" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3" />
+
+        <RadioButton
+            android:id="@+id/addCategoryDialogColor12"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:background="@drawable/background_color_radio_btn"
+            android:buttonTint="@android:color/white"
+            android:gravity="center"
+            android:scaleX="1.5"
+            android:scaleY="1.5" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3" />
+
+        <RadioButton
+            android:id="@+id/addCategoryDialogColor13"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:background="@drawable/background_color_radio_btn"
+            android:buttonTint="@android:color/white"
+            android:gravity="center"
+            android:scaleX="1.5"
+            android:scaleY="1.5" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3" />
+
+        <RadioButton
+            android:id="@+id/addCategoryDialogColor14"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:background="@drawable/background_color_radio_btn"
+            android:buttonTint="@android:color/white"
+            android:gravity="center"
+            android:scaleX="1.5"
+            android:scaleY="1.5" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3" />
+
+        <RadioButton
+            android:id="@+id/addCategoryDialogColor15"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:background="@drawable/background_color_radio_btn"
+            android:buttonTint="@android:color/white"
+            android:gravity="center"
+            android:scaleX="1.5"
+            android:scaleY="1.5" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/addCategoryDialogColorRow4"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:id="@+id/addCategoryDialogColor16"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:background="@drawable/background_color_radio_btn"
+            android:buttonTint="@android:color/white"
+            android:gravity="center"
+            android:scaleX="1.5"
+            android:scaleY="1.5" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3" />
+
+        <RadioButton
+            android:id="@+id/addCategoryDialogColor17"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:background="@drawable/background_color_radio_btn"
+            android:buttonTint="@android:color/white"
+            android:gravity="center"
+            android:scaleX="1.5"
+            android:scaleY="1.5" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3" />
+
+        <RadioButton
+            android:id="@+id/addCategoryDialogColor18"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:background="@drawable/background_color_radio_btn"
+            android:buttonTint="@android:color/white"
+            android:gravity="center"
+            android:scaleX="1.5"
+            android:scaleY="1.5" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3" />
+
+        <RadioButton
+            android:id="@+id/addCategoryDialogColor19"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:background="@drawable/background_color_radio_btn"
+            android:buttonTint="@android:color/white"
+            android:gravity="center"
+            android:scaleX="1.5"
+            android:scaleY="1.5" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3" />
+
+        <RadioButton
+            android:id="@+id/addCategoryDialogColor20"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_gravity="center"

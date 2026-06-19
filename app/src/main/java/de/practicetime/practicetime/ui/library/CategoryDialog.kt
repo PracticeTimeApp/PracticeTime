@@ -41,6 +41,10 @@ class CategoryDialog (
         dialogView.findViewById<RadioGroup>(R.id.addCategoryDialogColorRow1)
     private val categoryColorButtonGroupRow2 =
         dialogView.findViewById<RadioGroup>(R.id.addCategoryDialogColorRow2)
+    private val categoryColorButtonGroupRow3 =
+        dialogView.findViewById<RadioGroup>(R.id.addCategoryDialogColorRow3)
+    private val categoryColorButtonGroupRow4 =
+        dialogView.findViewById<RadioGroup>(R.id.addCategoryDialogColorRow4)
 
     private val categoryColorButtons = listOf<RadioButton>(
         dialogView.findViewById(R.id.addCategoryDialogColor1),
@@ -53,6 +57,16 @@ class CategoryDialog (
         dialogView.findViewById(R.id.addCategoryDialogColor8),
         dialogView.findViewById(R.id.addCategoryDialogColor9),
         dialogView.findViewById(R.id.addCategoryDialogColor10),
+        dialogView.findViewById(R.id.addCategoryDialogColor11),
+        dialogView.findViewById(R.id.addCategoryDialogColor12),
+        dialogView.findViewById(R.id.addCategoryDialogColor13),
+        dialogView.findViewById(R.id.addCategoryDialogColor14),
+        dialogView.findViewById(R.id.addCategoryDialogColor15),
+        dialogView.findViewById(R.id.addCategoryDialogColor16),
+        dialogView.findViewById(R.id.addCategoryDialogColor17),
+        dialogView.findViewById(R.id.addCategoryDialogColor18),
+        dialogView.findViewById(R.id.addCategoryDialogColor19),
+        dialogView.findViewById(R.id.addCategoryDialogColor20),
     )
 
     private var category: Category? = null
@@ -109,11 +123,10 @@ class CategoryDialog (
             button.setOnCheckedChangeListener { _, isChecked ->
                 if(isChecked) {
                     selectedColorIndex = index
-                    if (index < 5) {
-                        categoryColorButtonGroupRow2.clearCheck()
-                    } else {
-                        categoryColorButtonGroupRow1.clearCheck()
-                    }
+                    if (index !in 0..4) categoryColorButtonGroupRow1.clearCheck()
+                    if (index !in 5..9) categoryColorButtonGroupRow2.clearCheck()
+                    if (index !in 10..14) categoryColorButtonGroupRow3.clearCheck()
+                    if (index !in 15..19) categoryColorButtonGroupRow4.clearCheck()
                 }
             }
         }
@@ -128,6 +141,8 @@ class CategoryDialog (
         categoryNameView.text.clear()
         categoryColorButtonGroupRow1.clearCheck()
         categoryColorButtonGroupRow2.clearCheck()
+        categoryColorButtonGroupRow3.clearCheck()
+        categoryColorButtonGroupRow4.clearCheck()
         category = null
         selectedName = ""
         selectedColorIndex = -1
@@ -165,6 +180,12 @@ class CategoryDialog (
                 positiveButton.isEnabled = isComplete()
             }
             categoryColorButtonGroupRow2.setOnCheckedChangeListener { _, _ ->
+                positiveButton.isEnabled = isComplete()
+            }
+            categoryColorButtonGroupRow3.setOnCheckedChangeListener { _, _ ->
+                positiveButton.isEnabled = isComplete()
+            }
+            categoryColorButtonGroupRow4.setOnCheckedChangeListener { _, _ ->
                 positiveButton.isEnabled = isComplete()
             }
         }

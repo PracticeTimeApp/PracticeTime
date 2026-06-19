@@ -11,8 +11,14 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.Transformation
+import android.os.Handler
+import android.os.Looper
 import android.widget.LinearLayout
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,7 +52,15 @@ class ProgressUpdateActivity  : AppCompatActivity(R.layout.activity_progress_upd
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_progress_update)
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.activity_progress_update_root)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(top = systemBars.top, bottom = systemBars.bottom)
+            insets
+        }
 
         setSupportActionBar(findViewById(R.id.activity_progress_update_toolbar))
         supportActionBar.apply {

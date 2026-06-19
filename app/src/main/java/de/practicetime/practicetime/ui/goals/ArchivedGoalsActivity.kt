@@ -16,7 +16,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,8 +40,15 @@ class ArchivedGoalsActivity : AppCompatActivity() {
     private val adapterData = ArrayList<GoalInstanceWithDescriptionWithCategories>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_archived_goals)
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.activity_archived_goals_root)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(top = systemBars.top, bottom = systemBars.bottom)
+            insets
+        }
 
         setSupportActionBar(findViewById(R.id.activity_archived_goals_toolbar))
         supportActionBar?.apply {

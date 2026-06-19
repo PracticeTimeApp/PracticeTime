@@ -8,4 +8,6 @@
 .externalNativeBuild
 .cxx
 local.properties
-/app/release/
+/keystore
+/release
+app-release.aab
