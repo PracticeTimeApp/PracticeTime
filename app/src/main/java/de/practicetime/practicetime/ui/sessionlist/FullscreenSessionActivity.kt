@@ -82,7 +82,7 @@ class FullscreenSessionActivity : AppCompatActivity() {
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.activity_fullscreen_session_root)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.updatePadding(top = systemBars.top)
+            v.updatePadding(left = systemBars.left, top = systemBars.top, right = systemBars.right)
             findViewById<View>(R.id.linearLayout).updatePadding(bottom = systemBars.bottom)
             insets
         }

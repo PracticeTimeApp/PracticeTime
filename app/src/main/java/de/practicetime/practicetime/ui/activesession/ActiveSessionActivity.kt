@@ -254,7 +254,26 @@ class ActiveSessionActivity : AppCompatActivity() {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.coordinator_layout_active_session)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.updatePadding(left = systemBars.left, top = systemBars.top, right = systemBars.right)
-            findViewById<View>(R.id.constraintLayout_Bottom_btn).updatePadding(bottom = systemBars.bottom)
+            
+            val bottomBar = findViewById<View>(R.id.constraintLayout_Bottom_btn)
+            bottomBar.updatePadding(bottom = systemBars.bottom)
+
+            // Adjust main content margin to be above the bottom bar
+            val llActiveSession = findViewById<View>(R.id.ll_active_session)
+            val params = llActiveSession.layoutParams as CoordinatorLayout.LayoutParams
+            params.bottomMargin = systemBars.bottom + TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 56f, resources.displayMetrics).toInt()
+            llActiveSession.layoutParams = params
+
+            // Adjust overlay padding to ensure text is above the bottom bar
+            val tvOverlayPause = findViewById<View>(R.id.tv_overlay_pause)
+            tvOverlayPause.updatePadding(bottom = systemBars.bottom + TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 80f, resources.displayMetrics).toInt())
+
+            // Adjust bottom sheet container
+            val bottomSheetContainer = findViewById<View>(R.id.active_session_bottom_sheet_container)
+            val bsParams = bottomSheetContainer.layoutParams as CoordinatorLayout.LayoutParams
+            bsParams.bottomMargin = systemBars.bottom + TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 56f, resources.displayMetrics).toInt()
+            bottomSheetContainer.layoutParams = bsParams
+
             insets
         }
 
