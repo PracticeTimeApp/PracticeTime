@@ -83,7 +83,7 @@ class TimerFragment : Fragment() {
 
             override fun onFinish() {
                 if (beepSwitch.isChecked) {
-                    toneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP, 500)
+                    toneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP, 750)
                 }
                 if (loopSwitch.isChecked && isRunning) {
                     startTimer() // Restart for endless loop
@@ -104,7 +104,9 @@ class TimerFragment : Fragment() {
         inputSeconds.isEnabled = true
         loopSwitch.isEnabled = true
         beepSwitch.isEnabled = true
-        countdownText.text = getString(R.string.goalDialogDefaultDuration) + ":" + getString(R.string.goalDialogDefaultDuration)
+        
+        val defaultDuration = getString(R.string.goalDialogDefaultDuration)
+        countdownText.text = String.format(Locale.getDefault(), "%s:%s", defaultDuration, defaultDuration)
         
         // Allow screen to turn off when timer stops
         requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
