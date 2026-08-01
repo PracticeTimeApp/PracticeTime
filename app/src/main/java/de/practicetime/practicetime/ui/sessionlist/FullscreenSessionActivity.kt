@@ -7,6 +7,8 @@
 package de.practicetime.practicetime.ui.sessionlist
 
 import android.app.AlertDialog
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -35,14 +37,18 @@ import de.practicetime.practicetime.database.entities.SessionWithSectionsWithCat
 import de.practicetime.practicetime.shared.EditTimeDialog
 import de.practicetime.practicetime.ui.MainActivity
 import de.practicetime.practicetime.utils.TIME_FORMAT_HUMAN_PRETTY
+import de.practicetime.practicetime.utils.epochSecondsToDate
 import de.practicetime.practicetime.utils.getDurationString
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 
 class FullscreenSessionActivity : AppCompatActivity() {
 
     private lateinit var ratingBarView: RatingBar
+    private lateinit var dateTextView: TextView
     private lateinit var sectionListView: RecyclerView
     private lateinit var commentFieldView: TextView
 
@@ -55,12 +61,14 @@ class FullscreenSessionActivity : AppCompatActivity() {
     private var sessionWithSectionsWithCategories: SessionWithSectionsWithCategories? = null
     private var selectedSection: Section? = null
 
+    private var sessionTimestamp: Long = 0
+    private var timestampEdited = false
     private var showCommentPlaceholder = true
 
     private var sessionEdited = false
 
     override fun onBackPressed() {
-        if(!sessionEdited) return super.onBackPressed()
+        if(!sessionEdited && !timestampEdited) return super.onBackPressed()
         confirmationDialog.apply {
             setMessage(getString(R.string.discard_changes_dialog_message))
             show()
@@ -103,7 +111,7 @@ class FullscreenSessionActivity : AppCompatActivity() {
         if (sessionId != null) {
             showFullscreenSession(sessionId)
             findViewById<MaterialButton>(R.id.fullscreen_session_cancel).setOnClickListener {
-                if(!sessionEdited) return@setOnClickListener exitActivity()
+                if(!sessionEdited && !timestampEdited) return@setOnClickListener exitActivity()
                 confirmationDialog.apply {
                     setMessage(getString(R.string.discard_changes_dialog_message))
                     show()
@@ -133,6 +141,7 @@ class FullscreenSessionActivity : AppCompatActivity() {
                                     newSections = sectionAdapterData,
                                     newComment = if(showCommentPlaceholder) ""
                                         else commentFieldView.text.toString(),
+                                    newTimestamp = if (timestampEdited) sessionTimestamp else null
                                 )
                                 dismiss()
                                 exitActivity()
@@ -148,6 +157,7 @@ class FullscreenSessionActivity : AppCompatActivity() {
     }
 
     private fun showFullscreenSession(sessionId: Long) {
+        dateTextView = findViewById(R.id.fullscreen_session_date_text)
         ratingBarView = findViewById(R.id.fullscreen_session_rating_bar)
         sectionListView = findViewById(R.id.fullscreen_session_section_list)
         commentFieldView = findViewById(R.id.fullscreen_session_comment_field)
@@ -169,6 +179,13 @@ class FullscreenSessionActivity : AppCompatActivity() {
                 PracticeTime.sessionDao.getWithSectionsWithCategories(sessionId)
             val (session, sectionsWithCategories) = sessionWithSectionsWithCategories!!
 
+            sessionTimestamp = session.createdAt
+            updateDateUI()
+
+            findViewById<View>(R.id.fullscreen_session_date_layout).setOnClickListener {
+                showDateTimePicker()
+            }
+
             ratingBarView.progress = session.rating
             ratingBarView.setOnRatingBarChangeListener { _, _, _ ->
                 sessionEdited = true
@@ -187,6 +204,46 @@ class FullscreenSessionActivity : AppCompatActivity() {
             sectionAdapter.notifyItemRangeInserted(0, sectionsWithCategories.size)
         }
 
+    }
+
+    private fun updateDateUI() {
+        val zonedDateTime = epochSecondsToDate(sessionTimestamp)
+        val dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+
+        dateTextView.text = getString(
+            R.string.fullscreen_session_date,
+            zonedDateTime.format(dateFormatter),
+            zonedDateTime.format(timeFormatter)
+        )
+    }
+
+    private fun showDateTimePicker() {
+        val currentDateTime = epochSecondsToDate(sessionTimestamp)
+
+        DatePickerDialog(
+            this,
+            { _, year, month, dayOfMonth ->
+                TimePickerDialog(
+                    this,
+                    { _, hourOfDay, minute ->
+                        val newDateTime = ZonedDateTime.of(
+                            year, month + 1, dayOfMonth, hourOfDay, minute, 0, 0,
+                            currentDateTime.zone
+                        )
+                        sessionTimestamp = newDateTime.toEpochSecond()
+                        timestampEdited = true
+                        updateDateUI()
+                    },
+                    currentDateTime.hour,
+                    currentDateTime.minute,
+                    true
+                ).show()
+            },
+            currentDateTime.year,
+            currentDateTime.monthValue - 1,
+            currentDateTime.dayOfMonth
+        ).show()
     }
 
     private fun editSectionDurationHandler(section: Section?, newSectionDuration: Int) {
