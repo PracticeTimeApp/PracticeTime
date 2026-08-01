@@ -28,6 +28,7 @@
     <string name="timer_start">Start</string>
     <string name="timer_stop">Stop</string>
     <string name="timer_loop">Endless Loop</string>
+    <string name="timer_beep">Beep Sound</string>
     <string name="addCategoryDialogTitle">Add new Item</string>
     <string name="addCategoryDialogTitleEdit">Edit Item</string>
     <string name="addCategoryDialogNameHint">Item name</string>

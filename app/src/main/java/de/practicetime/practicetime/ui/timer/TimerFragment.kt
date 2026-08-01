@@ -30,6 +30,7 @@ class TimerFragment : Fragment() {
     private lateinit var startBtn: Button
     private lateinit var stopBtn: Button
     private lateinit var loopSwitch: SwitchMaterial
+    private lateinit var beepSwitch: SwitchMaterial
 
     private var timer: CountDownTimer? = null
     private var isRunning = false
@@ -47,6 +48,7 @@ class TimerFragment : Fragment() {
         startBtn = view.findViewById(R.id.timerStartBtn)
         stopBtn = view.findViewById(R.id.timerStopBtn)
         loopSwitch = view.findViewById(R.id.timerLoopSwitch)
+        beepSwitch = view.findViewById(R.id.timerBeepSwitch)
 
         startBtn.setOnClickListener { startTimer() }
         stopBtn.setOnClickListener { stopTimer() }
@@ -67,6 +69,7 @@ class TimerFragment : Fragment() {
         inputMinutes.isEnabled = false
         inputSeconds.isEnabled = false
         loopSwitch.isEnabled = false
+        beepSwitch.isEnabled = false
 
         // Keep screen on while timer is running
         requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
@@ -79,7 +82,9 @@ class TimerFragment : Fragment() {
             }
 
             override fun onFinish() {
-                toneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP, 500)
+                if (beepSwitch.isChecked) {
+                    toneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP, 500)
+                }
                 if (loopSwitch.isChecked && isRunning) {
                     startTimer() // Restart for endless loop
                 } else {
@@ -98,6 +103,7 @@ class TimerFragment : Fragment() {
         inputMinutes.isEnabled = true
         inputSeconds.isEnabled = true
         loopSwitch.isEnabled = true
+        beepSwitch.isEnabled = true
         countdownText.text = getString(R.string.goalDialogDefaultDuration) + ":" + getString(R.string.goalDialogDefaultDuration)
         
         // Allow screen to turn off when timer stops
