@@ -1,0 +1,96 @@
+/*
+ * This software is licensed under the MIT license
+ *
+ * Copyright (c) 2022, Javier Carbone, author Matthias Emde
+ */
+
+package de.practicetime.practicetime.ui.timer
+
+import android.media.AudioManager
+import android.media.ToneGenerator
+import android.os.Bundle
+import android.os.CountDownTimer
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import androidx.fragment.app.Fragment
+import de.practicetime.practicetime.R
+import java.util.Locale
+
+class TimerFragment : Fragment() {
+
+    private lateinit var countdownText: TextView
+    private lateinit var inputMinutes: EditText
+    private lateinit var inputSeconds: EditText
+    private lateinit var startBtn: Button
+    private lateinit var stopBtn: Button
+
+    private var timer: CountDownTimer? = null
+    private var isRunning = false
+    private val toneGenerator = ToneGenerator(AudioManager.STREAM_ALARM, 100)
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_timer, container, false)
+        countdownText = view.findViewById(R.id.timerCountdown)
+        inputMinutes = view.findViewById(R.id.timerInputMinutes)
+        inputSeconds = view.findViewById(R.id.timerInputSeconds)
+        startBtn = view.findViewById(R.id.timerStartBtn)
+        stopBtn = view.findViewById(R.id.timerStopBtn)
+
+        startBtn.setOnClickListener { startTimer() }
+        stopBtn.setOnClickListener { stopTimer() }
+
+        return view
+    }
+
+    private fun startTimer() {
+        val minutes = inputMinutes.text.toString().toLongOrNull() ?: 0L
+        val seconds = inputSeconds.text.toString().toLongOrNull() ?: 30L
+        val totalMillis = (minutes * 60 + seconds) * 1000
+
+        if (totalMillis <= 0) return
+
+        isRunning = true
+        startBtn.isEnabled = false
+        stopBtn.isEnabled = true
+        inputMinutes.isEnabled = false
+        inputSeconds.isEnabled = false
+
+        timer = object : CountDownTimer(totalMillis, 100) {
+            override fun onTick(millisUntilFinished: Long) {
+                val sec = (millisUntilFinished / 1000) % 60
+                val min = (millisUntilFinished / 1000) / 60
+                countdownText.text = String.format(Locale.getDefault(), "%02d:%02d", min, sec)
+            }
+
+            override fun onFinish() {
+                toneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP, 500)
+                stopTimer()
+            }
+        }.start()
+    }
+
+    private fun stopTimer() {
+        isRunning = false
+        timer?.cancel()
+        timer = null
+        startBtn.isEnabled = true
+        stopBtn.isEnabled = false
+        inputMinutes.isEnabled = true
+        inputSeconds.isEnabled = true
+        countdownText.text = "00:00"
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        timer?.cancel()
+        toneGenerator.release()
+    }
+}

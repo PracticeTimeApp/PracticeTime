@@ -22,6 +22,11 @@
         android:icon="@drawable/ic_bar_chart"
         android:title="@string/navigationStatisticsTitle"/>
     <item
+        android:id="@+id/timerFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_timer"
+        android:title="@string/navigationTimerTitle"/>
+    <item
         android:id="@+id/libraryFragment"
         android:enabled="true"
         android:icon="@drawable/ic_library"
