@@ -13,10 +13,12 @@ import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.google.android.material.switchmaterial.SwitchMaterial
 import de.practicetime.practicetime.R
 import java.util.Locale
 
@@ -27,6 +29,7 @@ class TimerFragment : Fragment() {
     private lateinit var inputSeconds: EditText
     private lateinit var startBtn: Button
     private lateinit var stopBtn: Button
+    private lateinit var loopSwitch: SwitchMaterial
 
     private var timer: CountDownTimer? = null
     private var isRunning = false
@@ -43,6 +46,7 @@ class TimerFragment : Fragment() {
         inputSeconds = view.findViewById(R.id.timerInputSeconds)
         startBtn = view.findViewById(R.id.timerStartBtn)
         stopBtn = view.findViewById(R.id.timerStopBtn)
+        loopSwitch = view.findViewById(R.id.timerLoopSwitch)
 
         startBtn.setOnClickListener { startTimer() }
         stopBtn.setOnClickListener { stopTimer() }
@@ -62,6 +66,10 @@ class TimerFragment : Fragment() {
         stopBtn.isEnabled = true
         inputMinutes.isEnabled = false
         inputSeconds.isEnabled = false
+        loopSwitch.isEnabled = false
+
+        // Keep screen on while timer is running
+        requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         timer = object : CountDownTimer(totalMillis, 100) {
             override fun onTick(millisUntilFinished: Long) {
@@ -72,7 +80,11 @@ class TimerFragment : Fragment() {
 
             override fun onFinish() {
                 toneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP, 500)
-                stopTimer()
+                if (loopSwitch.isChecked && isRunning) {
+                    startTimer() // Restart for endless loop
+                } else {
+                    stopTimer()
+                }
             }
         }.start()
     }
@@ -85,7 +97,11 @@ class TimerFragment : Fragment() {
         stopBtn.isEnabled = false
         inputMinutes.isEnabled = true
         inputSeconds.isEnabled = true
-        countdownText.text = "00:00"
+        loopSwitch.isEnabled = true
+        countdownText.text = getString(R.string.goalDialogDefaultDuration) + ":" + getString(R.string.goalDialogDefaultDuration)
+        
+        // Allow screen to turn off when timer stops
+        requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 
     override fun onDestroy() {
