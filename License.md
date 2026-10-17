@@ -1,6 +1,6 @@
 All source files without a license header are subject to the MIT License
 
-Copyright (c) 2022 Javier Carbone, authors Matthias Emde and Michael Prommersberger
+Copyright (c) 2022
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

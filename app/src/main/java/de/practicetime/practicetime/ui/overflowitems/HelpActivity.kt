@@ -1,7 +1,5 @@
 /*
  * This software is licensed under the MIT license
- *
- * Copyright (c) 2022, Javier Carbone, author Michael Prommersberger
  */
 
 package de.practicetime.practicetime.ui.overflowitems

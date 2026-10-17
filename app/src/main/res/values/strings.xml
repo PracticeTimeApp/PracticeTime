@@ -1,8 +1,5 @@
 <!--
     This software is licensed under the MIT license
-
-    Copyright (c) 2022, Javier Carbone, author Michael Prommersberger
-    Additions and modifications, author Matthias Emde
 -->
 <resources>
     <string name="app_name">PracticeTime!</string>
@@ -236,7 +233,7 @@
     <string name="legal_title">Legal Info</string>
     <string name="legal_project_hint">This project has been financed by the German music promotion program “Neustart Kultur“ by the GVL (Gesellschaft zur Verwertung von Leistungsschutzrechten mbH)</string>
     <string name="publisher">Publisher</string>
-    <string name="legal_text">Javier Carbone (Freelance)\nJakob Felder Weg 36\n55128, Mainz, Germany\npracticetimeapp@gmail.com</string>
+    <string name="legal_text">PracticeTime! Project\npracticetimeapp@gmail.com</string>
     <string name="privacy_policy_title">Privacy policy</string>
     <string name="privacy_policy">Practice Time! does not collect, share or store any personal Data.\n\nExceptions: When getting in contact with us through E-mail, we will remove your Personal Information from our records within 30 days. This information will not be shared.</string>
     <string name="help_tutorial_title">Tutorial</string>
@@ -244,9 +241,9 @@
     <string name="donations_button_text">Donate 🤍</string>
     <string name="about_app_title">About the app</string>
     <string name="concept_title">Concept</string>
-    <string name="concept_text">Javier Carbone</string>
+    <string name="concept_text">PracticeTime!</string>
     <string name="development_title">Design &amp; Development</string>
-    <string name="development_text">Matthias Emde\nMichael Prommersberger</string>
+    <string name="development_text">PracticeTime! Contributors</string>
     <string name="about_appicon_title">App Icon</string>
     <string name="about_appicon_text">Alejandra Contreras Westermeyer</string>
     <string name="url_donate">https://ko-fi.com/practicetime</string>
