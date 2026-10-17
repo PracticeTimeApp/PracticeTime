@@ -15,5 +15,5 @@ data class Section (
     @ColumnInfo(name="session_id", index = true) var sessionId: Long?,
     @ColumnInfo(name="category_id", index = true) val categoryId: Long,
     @ColumnInfo(name="duration") var duration: Int?,
-    @ColumnInfo(name="timestamp") val timestamp: Long,
+    @ColumnInfo(name="timestamp") var timestamp: Long,
 ) : BaseModel()

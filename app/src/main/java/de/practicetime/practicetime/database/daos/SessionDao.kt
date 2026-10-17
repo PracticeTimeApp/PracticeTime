@@ -100,37 +100,68 @@ abstract class SessionDao : BaseDao<Session>(tableName = "session") {
         newRating: Int,
         newSections: List<SectionWithCategory>,
         newComment: String,
+        newTimestamp: Long? = null
     ) {
         // the difference session will save the difference in the section duration
         // between the original session and the edited sections
         val sessionWithSectionsWithCategoriesWithGoals =
             getWithSectionsWithCategoriesWithGoals(sessionId)
 
-        sessionWithSectionsWithCategoriesWithGoals.sections.forEach { (section, _) ->
-            section.duration = (newSections.find {
-                it.section.id == section.id
-            }?.section?.duration ?: 0) - (section.duration ?: 0)
-        }
+        if (newTimestamp == null) {
+            // Existing logic for when timestamp doesn't change
+            sessionWithSectionsWithCategoriesWithGoals.sections.forEach { (section, _) ->
+                section.duration = (newSections.find {
+                    it.section.id == section.id
+                }?.section?.duration ?: 0) - (section.duration ?: 0)
+            }
 
-        val goalProgress = PracticeTime.goalDescriptionDao.computeGoalProgressForSession(
-            sessionWithSectionsWithCategoriesWithGoals,
-            checkArchived = true
-        )
+            val goalProgress = PracticeTime.goalDescriptionDao.computeGoalProgressForSession(
+                sessionWithSectionsWithCategoriesWithGoals,
+                checkArchived = true
+            )
 
-        // get all active goal instances at the time of the session
-        PracticeTime.goalInstanceDao.apply {
-            get(
-                goalDescriptionIds = goalProgress.keys.toList(),
-                from = sessionWithSectionsWithCategoriesWithGoals.sections.first().section.timestamp
-                // add the progress
-            ).onEach { instance ->
-                goalProgress[instance.goalDescriptionId].also { progress ->
-                    if (progress != null) {
-                        // progress should not get lower than 0
-                        instance.progress = maxOf(0 , instance.progress + progress)
+            // get all active goal instances at the time of the session
+            PracticeTime.goalInstanceDao.apply {
+                get(
+                    goalDescriptionIds = goalProgress.keys.toList(),
+                    from = sessionWithSectionsWithCategoriesWithGoals.sections.first().section.timestamp
+                    // add the progress
+                ).onEach { instance ->
+                    goalProgress[instance.goalDescriptionId].also { progress ->
+                        if (progress != null) {
+                            // progress should not get lower than 0
+                            instance.progress = maxOf(0, instance.progress + progress)
+                        }
                     }
+                    update(instance)
                 }
-                update(instance)
+            }
+        } else {
+            // Logic for when timestamp changes
+            // 1. Remove OLD progress
+            val oldGoalProgress = PracticeTime.goalDescriptionDao.computeGoalProgressForSession(
+                sessionWithSectionsWithCategoriesWithGoals,
+                checkArchived = true
+            )
+            PracticeTime.goalInstanceDao.apply {
+                get(
+                    goalDescriptionIds = oldGoalProgress.keys.toList(),
+                    from = sessionWithSectionsWithCategoriesWithGoals.sections.first().section.timestamp
+                ).onEach { instance ->
+                    oldGoalProgress[instance.goalDescriptionId].also { progress ->
+                        if (progress != null) {
+                            instance.progress = maxOf(0, instance.progress - progress)
+                        }
+                    }
+                    update(instance)
+                }
+            }
+
+            // 2. Update timestamps in data structures
+            val diff = newTimestamp - sessionWithSectionsWithCategoriesWithGoals.session.createdAt
+            sessionWithSectionsWithCategoriesWithGoals.session.createdAt = newTimestamp
+            newSections.forEach { (section, _) ->
+                section.timestamp += diff
             }
         }
 
@@ -145,5 +176,28 @@ abstract class SessionDao : BaseDao<Session>(tableName = "session") {
         }
 
         update(sessionWithSectionsWithCategoriesWithGoals.session)
+
+        if (newTimestamp != null) {
+            // 3. Add NEW progress at the new timestamp
+            // Refetch to get the updated relations with goal descriptions at the new time
+            val updatedSessionWithGoals = getWithSectionsWithCategoriesWithGoals(sessionId)
+            val newGoalProgress = PracticeTime.goalDescriptionDao.computeGoalProgressForSession(
+                updatedSessionWithGoals,
+                checkArchived = true
+            )
+            PracticeTime.goalInstanceDao.apply {
+                get(
+                    goalDescriptionIds = newGoalProgress.keys.toList(),
+                    from = newTimestamp
+                ).onEach { instance ->
+                    newGoalProgress[instance.goalDescriptionId].also { progress ->
+                        if (progress != null) {
+                            instance.progress += progress
+                        }
+                    }
+                    update(instance)
+                }
+            }
+        }
     }
 }

@@ -26,6 +26,11 @@
         android:label="Library"
         tools:layout="@layout/fragment_statistics_overview" />
     <fragment
+        android:id="@+id/timerFragment"
+        android:name="de.practicetime.practicetime.ui.timer.TimerFragment"
+        android:label="Timer"
+        tools:layout="@layout/fragment_timer" />
+    <fragment
         android:id="@+id/libraryFragment"
         android:name="de.practicetime.practicetime.ui.library.LibraryFragment"
         android:label="Library"

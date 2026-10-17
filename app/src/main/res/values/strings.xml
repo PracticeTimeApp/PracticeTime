@@ -22,6 +22,13 @@
     <string name="navigationGoalsTitle">Goals</string>
     <string name="navigationSessionsTitle">Sessions</string>
     <string name="navigationStatisticsTitle">Statistics</string>
+    <string name="navigationTimerTitle">Timer</string>
+    <string name="timer_minutes">Min</string>
+    <string name="timer_seconds">Sec</string>
+    <string name="timer_start">Start</string>
+    <string name="timer_stop">Stop</string>
+    <string name="timer_loop">Endless Loop</string>
+    <string name="timer_beep">Beep Sound</string>
     <string name="addCategoryDialogTitle">Add new Item</string>
     <string name="addCategoryDialogTitleEdit">Edit Item</string>
     <string name="addCategoryDialogNameHint">Item name</string>

@@ -11,3 +11,4 @@ local.properties
 /keystore
 /release
 app-release.aab
+.artifacts
