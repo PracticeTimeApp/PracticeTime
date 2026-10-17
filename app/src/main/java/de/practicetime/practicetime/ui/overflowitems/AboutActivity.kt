@@ -81,10 +81,6 @@ class AboutActivity : AppCompatActivity() {
             exportCSVDialog.show()
         }
 
-        findViewById<TextView>(R.id.about_tv_support).setOnClickListener {
-            startActivity(Intent(this, DonationsActivity::class.java))
-        }
-
         findViewById<TextView>(R.id.about_tv_legal).setOnClickListener {
             startActivity(Intent(this, LegalActivity::class.java))
         }
