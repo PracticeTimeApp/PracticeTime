@@ -33,16 +33,16 @@ Single-module project (`:app`).
 - **Static Accessors**: `PracticeTime` (Application class) provides static access to DAOs and common utilities.
 - **Broadcasting**: `LocalBroadcastManager` is used for internal communication (e.g., recording duration updates).
 
-## 5. Recent Version 1.2.0 Changes
-- **Infrastructure**: Upgraded AGP (8.4.0), Kotlin (1.9.23), and Room (2.6.1).
-- **Edge-to-Edge**: Full implementation of Android 15 edge-to-edge support across all activities.
-- **Colors**: Expanded category colors from 10 to 20.
-- **Tuner**: Added a chromatic tuner fragment using autocorrelation.
-- **Loop-Timer**: Added a loopable timer with beep notifications (Branch: `add-timer-beep`).
+## 5. Recent Version Changes (1.2.0 & 1.3.0)
+- **Infrastructure (v1.2.0)**: Upgraded AGP (8.4.0), Kotlin (1.9.23), and Room (2.6.1).
+- **Edge-to-Edge (v1.2.0)**: Full implementation of Android 15 edge-to-edge support across all activities.
+- **Colors (v1.2.0)**: Expanded category colors from 10 to 20.
+- **Tuner (v1.2.0)**: Added a chromatic tuner fragment using autocorrelation.
+- **Loop-Timer & Custom Beep (v1.2.0 - v1.3.0)**: Added loopable timer and custom MP3 beep notifications (`res/raw/custom_beep.mp3` played via `MediaPlayer` in `TimerFragment`).
 
 ## 6. Development Rules for Agents
 1. **Branch Hygiene**: 
-   - Feature work goes into dedicated branches (e.g., `tuner`, `add-timer-beep`).
+   - Feature work goes into dedicated branches (e.g., `tuner`, `countdown-beep-1.3.0`).
    - `master` should only receive stable, approved merges.
 2. **UI Integrity**: Always check that bottom navigation and top toolbars respect system insets.
 3. **Strings**: All user-facing text must be defined in `strings.xml`.
@@ -54,4 +54,4 @@ Single-module project (`:app`).
 - **Transitive Resources**: `android.nonTransitiveRClass=false` is set in `gradle.properties` to ensure resource resolution consistency in this legacy codebase.
 
 ---
-*Refer to `Changes-1.2.0.md` for a chronological history of recent modernization steps.*
+*Refer to `Changes-1.2.0.md` and `Changes-1.3.0.md` for a chronological history of recent updates.*
