@@ -12,5 +12,8 @@ Replaced the legacy system tone generator with a robust custom audio playback me
     *   Ensured proper resource release (`setOnCompletionListener { it.release() }`) upon playback finish.
     *   Allows fully customizable sound duration, quality, and audio profile matching user preferences.
 
+## 2. Target SDK Update (API 36)
+*   Increased `compileSdk` and `targetSdk` from `35` to `36` in `app/build.gradle` to comply with Google Play Console target API requirements.
+
 ---
-**Summary:** Version 1.3.0 (`countdown-beep-1.3.0` branch) delivers flexible timer beep notifications powered by custom audio resources.
+**Summary:** Version 1.3.0 (`countdown-beep-1.3.0` branch) delivers flexible timer beep notifications powered by custom audio resources and targets API 36.

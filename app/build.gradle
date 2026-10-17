@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace "de.practicetime.practicetime"
-    compileSdk 35
+    compileSdk 36
 
     defaultConfig {
         applicationId "de.practicetime.practicetime"
         minSdk 23
-        targetSdk 35
+        targetSdk 36
         versionCode 17
         versionName "1.3.0"
 

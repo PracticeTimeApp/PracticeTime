@@ -6,7 +6,7 @@ This document serves as a comprehensive briefing for AI agents working on the Pr
 PracticeTime! is an offline-first Android application for musicians to track their practice habits, set goals, and use practice tools (Metronome, Tuner, Recorder).
 
 - **Privacy Principle**: The app DOES NOT collect PII and DOES NOT transmit data externally. Everything is stored in a local Room database.
-- **Modernization**: Recently upgraded to support **Android 15 (API 35)** and **Java 21**.
+- **Modernization**: Upgraded to support **Android (API 36)** and **Java 21**.
 
 ## 2. Tech Stack
 - **Language**: Kotlin 1.9.23
@@ -39,6 +39,7 @@ Single-module project (`:app`).
 - **Colors (v1.2.0)**: Expanded category colors from 10 to 20.
 - **Tuner (v1.2.0)**: Added a chromatic tuner fragment using autocorrelation.
 - **Loop-Timer & Custom Beep (v1.2.0 - v1.3.0)**: Added loopable timer and custom MP3 beep notifications (`res/raw/custom_beep.mp3` played via `MediaPlayer` in `TimerFragment`).
+- **Target SDK (v1.3.0)**: Updated `compileSdk` and `targetSdk` to `36` to comply with Google Play requirements.
 
 ## 6. Development Rules for Agents
 1. **Branch Hygiene**: 
