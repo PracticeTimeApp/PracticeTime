@@ -6,8 +6,7 @@
 
 package de.practicetime.practicetime.ui.timer
 
-import android.media.AudioManager
-import android.media.ToneGenerator
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
@@ -34,7 +33,6 @@ class TimerFragment : Fragment() {
 
     private var timer: CountDownTimer? = null
     private var isRunning = false
-    private val toneGenerator = ToneGenerator(AudioManager.STREAM_ALARM, 100)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -83,7 +81,7 @@ class TimerFragment : Fragment() {
 
             override fun onFinish() {
                 if (beepSwitch.isChecked) {
-                    toneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP, 750)
+                    playBeep()
                 }
                 if (loopSwitch.isChecked && isRunning) {
                     startTimer() // Restart for endless loop
@@ -92,6 +90,17 @@ class TimerFragment : Fragment() {
                 }
             }
         }.start()
+    }
+
+    private fun playBeep() {
+        try {
+            MediaPlayer.create(requireContext(), R.raw.custom_beep)?.apply {
+                setOnCompletionListener { mp -> mp.release() }
+                start()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     private fun stopTimer() {
@@ -115,6 +124,5 @@ class TimerFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         timer?.cancel()
-        toneGenerator.release()
     }
 }
