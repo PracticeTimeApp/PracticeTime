@@ -22,6 +22,7 @@ import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -314,7 +315,13 @@ class SessionListFragment : Fragment(R.layout.fragment_sessions_list) {
         sessionListToolbar.apply {
             menu?.clear()
             inflateMenu(R.menu.sessions_list_menu_base)
-            setCommonToolbar(requireActivity(), this) { }
+            setCommonToolbar(requireActivity(), this) { itemId ->
+                when (itemId) {
+                    R.id.sessionsListToolbarNotes -> {
+                        findNavController().navigate(R.id.notesFragment)
+                    }
+                }
+            }
             navigationIcon = null
         }
         sessionListCollapsingToolbarLayout.background = null

@@ -27,8 +27,8 @@
         android:icon="@drawable/ic_timer"
         android:title="@string/navigationTimerTitle"/>
     <item
-        android:id="@+id/notesFragment"
+        android:id="@+id/libraryFragment"
         android:enabled="true"
-        android:icon="@drawable/ic_notes"
-        android:title="@string/navigationNotesTitle" />
+        android:icon="@drawable/ic_library"
+        android:title="@string/navigationLibraryTitle" />
 </menu>
