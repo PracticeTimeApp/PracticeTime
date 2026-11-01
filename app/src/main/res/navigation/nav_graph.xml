@@ -35,4 +35,9 @@
         android:name="de.practicetime.practicetime.ui.library.LibraryFragment"
         android:label="Library"
         tools:layout="@layout/fragment_library" />
+    <fragment
+        android:id="@+id/notesFragment"
+        android:name="de.practicetime.practicetime.ui.notes.NotesFragment"
+        android:label="Notes"
+        tools:layout="@layout/fragment_notes" />
 </navigation>

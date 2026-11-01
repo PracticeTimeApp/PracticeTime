@@ -31,4 +31,9 @@
         android:enabled="true"
         android:icon="@drawable/ic_library"
         android:title="@string/navigationLibraryTitle" />
+    <item
+        android:id="@+id/notesFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_notes"
+        android:title="@string/navigationNotesTitle" />
 </menu>

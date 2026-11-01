@@ -23,6 +23,7 @@
     <string name="navigationSessionsTitle">Sessions</string>
     <string name="navigationStatisticsTitle">Statistics</string>
     <string name="navigationTimerTitle">Timer</string>
+    <string name="navigationNotesTitle">Notes</string>
     <string name="timer_minutes">Min</string>
     <string name="timer_seconds">Sec</string>
     <string name="timer_start">Start</string>
