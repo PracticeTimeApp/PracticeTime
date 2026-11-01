@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This software is licensed under the MIT license
+
+    Copyright (c) 2022, Javier Carbone, author Matthias Emde
+    Additions and modifications, author Michael Prommersberger
+-->
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.notes.NotesFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/notesAppbar"
+        style="@style/AppBar">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/notes_collapsing_toolbar_layout"
+            style="@style/CollapsingToolbar"
+            app:title="@string/navigationNotesTitle"
+            app:toolbarId="@+id/notesToolbar">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/notesToolbar"
+                style="@style/Toolbar" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/notesPlaceholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Notes feature coming soon"
+        android:textSize="18sp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
