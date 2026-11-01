@@ -11,4 +11,10 @@
         android:enabled="true"
         android:title="@string/archivedGoalsTitle"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/goalsToolbarNotes"
+        android:enabled="true"
+        android:icon="@drawable/ic_notes"
+        android:title="@string/navigationNotesTitle"
+        app:showAsAction="never" />
 </menu>

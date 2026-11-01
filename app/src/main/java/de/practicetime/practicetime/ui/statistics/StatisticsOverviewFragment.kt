@@ -16,6 +16,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.PieChart
@@ -79,9 +80,11 @@ class StatisticsOverviewFragment : Fragment(R.layout.fragment_statistics_overvie
         }
 
         setCommonToolbar(requireActivity(), view.findViewById(R.id.statsToolbar)) {
-//                Place menu item click handler here
-//                when(it) {
-//                }
+            when(it) {
+                R.id.statsToolbarNotes -> {
+                    findNavController().navigate(R.id.notesFragment)
+                }
+            }
         }
     }
 

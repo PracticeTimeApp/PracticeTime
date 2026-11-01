@@ -6,4 +6,12 @@
 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/libraryToolbarNotes"
+        android:enabled="true"
+        android:icon="@drawable/ic_notes"
+        android:title="@string/navigationNotesTitle"
+        app:showAsAction="never" />
+
 </menu>

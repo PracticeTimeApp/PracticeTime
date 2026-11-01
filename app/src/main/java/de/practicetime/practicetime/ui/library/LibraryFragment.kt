@@ -20,6 +20,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -229,9 +230,11 @@ class LibraryFragment : Fragment(R.layout.fragment_library) {
         libraryToolbar.apply {
             menu?.clear()
             setCommonToolbar(requireActivity(), this) {
-//                Place menu item click handler here
-//                when(it) {
-//                }
+                when(it) {
+                    R.id.libraryToolbarNotes -> {
+                        findNavController().navigate(R.id.notesFragment)
+                    }
+                }
             }
             inflateMenu(R.menu.library_toolbar_menu_base)
             navigationIcon = null
