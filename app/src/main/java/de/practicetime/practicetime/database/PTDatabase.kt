@@ -18,18 +18,20 @@ import androidx.sqlite.db.SupportSQLiteQueryBuilder
 import de.practicetime.practicetime.database.daos.CategoryDao
 import de.practicetime.practicetime.database.daos.GoalDescriptionDao
 import de.practicetime.practicetime.database.daos.GoalInstanceDao
+import de.practicetime.practicetime.database.daos.NoteDao
 import de.practicetime.practicetime.database.daos.SectionDao
 import de.practicetime.practicetime.database.daos.SessionDao
 import de.practicetime.practicetime.database.entities.Category
 import de.practicetime.practicetime.database.entities.GoalDescription
 import de.practicetime.practicetime.database.entities.GoalDescriptionCategoryCrossRef
 import de.practicetime.practicetime.database.entities.GoalInstance
+import de.practicetime.practicetime.database.entities.Note
 import de.practicetime.practicetime.database.entities.Section
 import de.practicetime.practicetime.database.entities.Session
 import de.practicetime.practicetime.utils.getCurrTimestamp
 
 @Database(
-    version = 2,
+    version = 3,
     entities = [
         Session::class,
         Section::class,
@@ -37,6 +39,7 @@ import de.practicetime.practicetime.utils.getCurrTimestamp
         GoalDescription::class,
         GoalInstance::class,
         GoalDescriptionCategoryCrossRef::class,
+        Note::class,
     ],
     exportSchema = true,
 )
@@ -46,6 +49,7 @@ abstract class PTDatabase : RoomDatabase() {
     abstract val goalInstanceDao : GoalInstanceDao
     abstract val sessionDao : SessionDao
     abstract val sectionDao : SectionDao
+    abstract val noteDao : NoteDao
 
     suspend fun validate(): Boolean {
         return try {
@@ -57,6 +61,14 @@ abstract class PTDatabase : RoomDatabase() {
             Log.e("PTDatabase", "Validation failed:  ${e.javaClass.simpleName}: ${e.message}")
             false
         }
+    }
+}
+
+object PTDatabaseMigrationTwoToThree : Migration(2, 3) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        // Create the note table for the Notes feature
+        db.execSQL("CREATE TABLE IF NOT EXISTS `note` (`title` TEXT NOT NULL, `content` TEXT NOT NULL, `profile_id` INTEGER NOT NULL, `created_at` INTEGER NOT NULL DEFAULT 0, `modified_at` INTEGER NOT NULL DEFAULT 0, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)")
+        db.execSQL("CREATE INDEX IF NOT EXISTS `index_note_profile_id` ON `note` (`profile_id`)")
     }
 }
 

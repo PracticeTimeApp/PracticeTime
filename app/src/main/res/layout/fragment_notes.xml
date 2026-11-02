@@ -30,19 +30,30 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/notesRecyclerView"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/notesFab"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        
-        <TextView
-            android:id="@+id/notesPlaceholder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Notes feature coming soon"
-            android:textSize="18sp" />
-    </LinearLayout>
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:src="@android:drawable/ic_input_add"
+        android:contentDescription="@string/new_category_fab" />
+
+    <TextView
+        android:id="@+id/notesEmptyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/libraryHint"
+        android:textSize="18sp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

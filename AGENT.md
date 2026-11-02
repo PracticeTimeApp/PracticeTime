@@ -59,4 +59,4 @@ Single-module project (`:app`).
 - **Transitive Resources**: `android.nonTransitiveRClass=false` is set in `gradle.properties` to ensure resource resolution consistency in this legacy codebase.
 
 ---
-*Refer to `Changes-1.2.0.md` and `Changes-1.3.0.md` for a chronological history of recent updates.*
+*Refer to `Docs/Changes-1.2.0.md` and `Docs/Changes-1.3.0.md` for a chronological history of recent updates.*

@@ -7,11 +7,11 @@ Fixed initial build errors and ensured compatibility with modern Android environ
 
 *   **Gradle Wrapper Upgrade (`gradle-wrapper.properties`)**: Upgraded from `7.2` to `8.7`.
     *   *Reason:* Required to support Java 21 and newer Android Gradle Plugin versions.
-*   **Android Gradle Plugin Upgrade (`build.gradle`)**: Upgraded from `7.1.1` to `8.4.0`.
+* **Android Gradle Plugin Upgrade (`../build.gradle`)**: Upgraded from `7.1.1` to `8.4.0`.
     *   *Reason:* Required for compatibility with Android 14/15 and modern build tools.
-*   **Kotlin Upgrade (`build.gradle`)**: Upgraded from `1.6.10` to `1.9.23`.
+* **Kotlin Upgrade (`../build.gradle`)**: Upgraded from `1.6.10` to `1.9.23`.
     *   *Reason:* Needed for compatibility with the newer Gradle plugin and modern language features.
-*   **Room Database Upgrade (`app/build.gradle`)**: Upgraded from `2.4.1` to `2.6.1`.
+* **Room Database Upgrade (`../app/build.gradle`)**: Upgraded from `2.4.1` to `2.6.1`.
     *   *Reason:* Resolved critical compilation errors where `suspend` functions in DAOs were incorrectly handled by the older Room compiler.
 *   **Target SDK Update**: Increased `compileSdk` and `targetSdk` from `34` to `35`.
     *   *Reason:* Compliance with Google Play Store requirements for Android 15.
@@ -40,7 +40,7 @@ Resolved layout collisions where app content overlapped with system UI elements 
     *   *Update:* Dynamically adjusted margins for main content and pause overlays in `ActiveSessionActivity` to perfectly align with the new dynamic bar height.
 
 ## 4. Git Maintenance
-*   **`.gitignore` Improvements**: Added `/release` and `/keystore` to the exclusion lists.
+* **`../.gitignore` Improvements**: Added `/release` and `/keystore` to the exclusion lists.
     *   *Reason:* Prevents accidental commits of binary build artifacts and sensitive signing credentials.
 
 ---
