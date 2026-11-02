@@ -9,24 +9,27 @@ package de.practicetime.practicetime.database.daos
 
 import androidx.room.Dao
 import androidx.room.Query
-import androidx.room.Transaction
 import de.practicetime.practicetime.database.BaseDao
 import de.practicetime.practicetime.database.entities.Note
 
 @Dao
 abstract class NoteDao : BaseDao<Note>(tableName = "note") {
 
+    @Query("SELECT * FROM note WHERE profile_id = 0 ORDER BY modified_at DESC")
+    protected abstract suspend fun getAllInternal(): List<Note>
+
     /**
      * Get all notes for the current profile
      */
-    @Query("SELECT * FROM note WHERE profile_id = 0 ORDER BY modified_at DESC")
-    override suspend fun getAll(): List<Note>
+    override suspend fun getAll(): List<Note> = getAllInternal()
+
+    @Query("SELECT * FROM note WHERE id = :id AND profile_id = 0")
+    protected abstract suspend fun getInternal(id: Long): Note?
 
     /**
      * Get a single note by ID
      */
-    @Query("SELECT * FROM note WHERE id = :id AND profile_id = 0")
-    override suspend fun get(id: Long): Note?
+    override suspend fun get(id: Long): Note? = getInternal(id)
 
     /**
      * Check if a title already exists for the current profile
