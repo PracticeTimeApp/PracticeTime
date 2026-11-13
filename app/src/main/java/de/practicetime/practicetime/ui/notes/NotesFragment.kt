@@ -137,13 +137,13 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         // Enable/disable save button based on validation
         dialog.setOnShowListener {
             val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-            positiveButton.isEnabled = validateNote(titleEditText, contentEditText)
+            positiveButton.isEnabled = validateNote(titleEditText, contentEditText, showError = false)
             
             titleEditText.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
                 override fun afterTextChanged(s: Editable?) {
-                    positiveButton.isEnabled = validateNote(titleEditText, contentEditText)
+                    positiveButton.isEnabled = validateNote(titleEditText, contentEditText, showError = true)
                 }
             })
             
@@ -151,7 +151,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
                 override fun afterTextChanged(s: Editable?) {
-                    positiveButton.isEnabled = validateNote(titleEditText, contentEditText)
+                    positiveButton.isEnabled = validateNote(titleEditText, contentEditText, showError = true)
                 }
             })
         }
@@ -159,22 +159,32 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         dialog.show()
     }
 
-    private fun validateNote(titleEditText: EditText, contentEditText: EditText): Boolean {
+    private fun validateNote(
+        titleEditText: EditText,
+        contentEditText: EditText,
+        showError: Boolean = true
+    ): Boolean {
         val title = titleEditText.text.toString().trim()
         val content = contentEditText.text.toString()
 
         if (title.isEmpty()) {
-            titleEditText.error = getString(R.string.note_title_required)
+            if (showError) {
+                titleEditText.error = getString(R.string.note_title_required)
+            }
             return false
         }
 
         if (title.length > Note.MAX_TITLE_LENGTH) {
-            titleEditText.error = getString(R.string.note_max_title_length, Note.MAX_TITLE_LENGTH)
+            if (showError) {
+                titleEditText.error = getString(R.string.note_max_title_length, Note.MAX_TITLE_LENGTH)
+            }
             return false
         }
 
         if (content.length > Note.MAX_CONTENT_LENGTH) {
-            contentEditText.error = getString(R.string.note_max_content_length, Note.MAX_CONTENT_LENGTH)
+            if (showError) {
+                contentEditText.error = getString(R.string.note_max_content_length, Note.MAX_CONTENT_LENGTH)
+            }
             return false
         }
 
@@ -189,14 +199,14 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
 
         lifecycleScope.launch {
             try {
-                val note = existingNote?.copy(title = title, content = content) 
-                    ?: Note(title = title, content = content)
-                
                 if (existingNote == null) {
+                    val note = Note(title = title, content = content)
                     PracticeTime.noteDao.insert(note)
                     Toast.makeText(requireContext(), "Note created", Toast.LENGTH_SHORT).show()
                 } else {
-                    PracticeTime.noteDao.update(note)
+                    existingNote.title = title
+                    existingNote.content = content
+                    PracticeTime.noteDao.update(existingNote)
                     Toast.makeText(requireContext(), "Note updated", Toast.LENGTH_SHORT).show()
                 }
                 
