@@ -125,20 +125,50 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         charCountText.text = "${contentEditText.text.length}/${Note.MAX_CONTENT_LENGTH}"
 
         // Create dialog
-        val dialog = AlertDialog.Builder(requireContext())
-            .setTitle(if (existingNote == null) R.string.note_create_title else R.string.note_edit_title)
+        val isNewNote = existingNote == null
+        val dialogTitle = if (isNewNote) R.string.note_create_title else R.string.note_view_title
+
+        val builder = AlertDialog.Builder(requireContext())
+            .setTitle(dialogTitle)
             .setView(dialogView)
             .setPositiveButton(R.string.note_save) { _, _ ->
                 saveNote(existingNote, titleEditText, contentEditText)
             }
             .setNegativeButton(R.string.note_cancel, null)
-            .create()
 
-        // Enable/disable save button based on validation
+        if (!isNewNote) {
+            builder.setNeutralButton(R.string.note_edit, null)
+        }
+
+        val dialog = builder.create()
+
         dialog.setOnShowListener {
             val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-            positiveButton.isEnabled = validateNote(titleEditText, contentEditText, showError = false)
-            
+            val neutralButton = dialog.getButton(AlertDialog.BUTTON_NEUTRAL)
+
+            fun applyEditMode(editing: Boolean) {
+                titleEditText.isEnabled = editing
+                contentEditText.isEnabled = editing
+
+                if (editing) {
+                    dialog.setTitle(if (isNewNote) R.string.note_create_title else R.string.note_edit_title)
+                    positiveButton.visibility = View.VISIBLE
+                    positiveButton.isEnabled = validateNote(titleEditText, contentEditText, showError = !isNewNote)
+                    neutralButton?.visibility = View.GONE
+                } else {
+                    dialog.setTitle(R.string.note_view_title)
+                    positiveButton.visibility = View.GONE
+                    neutralButton?.visibility = View.VISIBLE
+                }
+            }
+
+            applyEditMode(isNewNote)
+
+            neutralButton?.setOnClickListener {
+                applyEditMode(true)
+                titleEditText.requestFocus()
+            }
+
             titleEditText.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -146,7 +176,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
                     positiveButton.isEnabled = validateNote(titleEditText, contentEditText, showError = true)
                 }
             })
-            
+
             contentEditText.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}

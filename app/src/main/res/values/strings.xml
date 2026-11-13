@@ -29,6 +29,8 @@
     <string name="note_content_hint">Content</string>
     <string name="note_create_title">Create Note</string>
     <string name="note_edit_title">Edit Note</string>
+    <string name="note_view_title">View Note</string>
+    <string name="note_edit">Edit</string>
     <string name="note_save">Save</string>
     <string name="note_cancel">Cancel</string>
     <string name="note_delete_title">Delete Note</string>
