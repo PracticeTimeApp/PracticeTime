@@ -1,12 +1,13 @@
 /*
  * This software is licensed under the MIT license
- *
- * Copyright (c) 2022, Javier Carbone, author Michael Prommersberger
  */
 
 package de.practicetime.practicetime.ui.overflowitems
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import de.practicetime.practicetime.R
 
@@ -21,6 +22,11 @@ class AboutAppActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
             title = getString(R.string.about_app_title)
+        }
+
+        findViewById<TextView>(R.id.about_app_github_link)?.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.development_github_url)))
+            startActivity(intent)
         }
     }
 }

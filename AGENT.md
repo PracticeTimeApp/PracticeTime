@@ -67,6 +67,7 @@ Single-module project (`:app`). Application class: `de.practicetime.practicetime
 5. **Strings**: All user-facing text must be defined in `strings.xml`.
 6. **Build Status**: Ensure `clean assembleDebug` passes after every major change.
 7. **Skill Utilization**: Use `.github/skills/dependency_audit.md` for checking library versions.
+8. **No Unrequested Git Commits**: Do NOT execute `git commit`. All git commits are handled directly by the user.
 
 ## 7. Known Constraints
 - **Simulation**: Testing audio (Tuner/Beep) on simulators can be inconsistent. Always prefer real device verification for audio features.
