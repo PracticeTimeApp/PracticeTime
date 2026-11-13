@@ -124,6 +124,9 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         contentEditText.addTextChangedListener(textWatcher)
         charCountText.text = "${contentEditText.text.length}/${Note.MAX_CONTENT_LENGTH}"
 
+        val defaultTitleKeyListener = titleEditText.keyListener
+        val defaultContentKeyListener = contentEditText.keyListener
+
         // Create dialog
         val isNewNote = existingNote == null
         val dialogTitle = if (isNewNote) R.string.note_create_title else R.string.note_view_title
@@ -147,15 +150,30 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
             val neutralButton = dialog.getButton(AlertDialog.BUTTON_NEUTRAL)
 
             fun applyEditMode(editing: Boolean) {
-                titleEditText.isEnabled = editing
-                contentEditText.isEnabled = editing
-
                 if (editing) {
+                    titleEditText.keyListener = defaultTitleKeyListener
+                    contentEditText.keyListener = defaultContentKeyListener
+                    titleEditText.isFocusable = true
+                    titleEditText.isFocusableInTouchMode = true
+                    titleEditText.isCursorVisible = true
+                    contentEditText.isFocusable = true
+                    contentEditText.isFocusableInTouchMode = true
+                    contentEditText.isCursorVisible = true
+
                     dialog.setTitle(if (isNewNote) R.string.note_create_title else R.string.note_edit_title)
                     positiveButton.visibility = View.VISIBLE
                     positiveButton.isEnabled = validateNote(titleEditText, contentEditText, showError = !isNewNote)
                     neutralButton?.visibility = View.GONE
                 } else {
+                    titleEditText.keyListener = null
+                    contentEditText.keyListener = null
+                    titleEditText.isFocusable = false
+                    titleEditText.isFocusableInTouchMode = false
+                    titleEditText.isCursorVisible = false
+                    contentEditText.isFocusable = false
+                    contentEditText.isFocusableInTouchMode = false
+                    contentEditText.isCursorVisible = false
+
                     dialog.setTitle(R.string.note_view_title)
                     positiveButton.visibility = View.GONE
                     neutralButton?.visibility = View.VISIBLE
