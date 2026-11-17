@@ -1,8 +1,5 @@
 <!--
     This software is licensed under the MIT license
-
-    Copyright (c) 2022, Javier Carbone, author Michael Prommersberger
-    Additions and modifications, author Matthias Emde
 -->
 <resources>
     <string name="app_name">PracticeTime!</string>
@@ -23,6 +20,22 @@
     <string name="navigationSessionsTitle">Sessions</string>
     <string name="navigationStatisticsTitle">Statistics</string>
     <string name="navigationTimerTitle">Timer</string>
+    <string name="navigationNotesTitle">Notes</string>
+    <string name="notes_empty_hint">No notes yet. Tap + to create one.</string>
+    <string name="note_title_hint">Title</string>
+    <string name="note_content_hint">Content</string>
+    <string name="note_create_title">Create Note</string>
+    <string name="note_edit_title">Edit Note</string>
+    <string name="note_view_title">View Note</string>
+    <string name="note_edit">Edit</string>
+    <string name="note_save">Save</string>
+    <string name="note_cancel">Cancel</string>
+    <string name="note_delete_title">Delete Note</string>
+    <string name="note_delete_message">Are you sure you want to delete this note?</string>
+    <string name="note_delete_confirm">Delete</string>
+    <string name="note_title_required">Title is required</string>
+    <string name="note_max_title_length">Title cannot exceed %d characters</string>
+    <string name="note_max_content_length">Content cannot exceed %d characters</string>
     <string name="timer_minutes">Min</string>
     <string name="timer_seconds">Sec</string>
     <string name="timer_start">Start</string>
@@ -221,35 +234,30 @@
         <item>Long-clicking on sessions, goals or library items to select and delete them?</item>
     </string-array>
 
-    <string name="donations_title">Support us!</string>
-    <string name="donations_text">If you are enjoying the app and would like to support us, we would be very thankful for a small donation.\n\nThis will help us in developing awesome new features like:</string>
+
     <string name="settings">Settings</string>
-    <string-array name="array_donations_text_bulletlist">
-        <item>Sharable sessions</item>
-        <item>Integrated tuner</item>
-        <item>Special layout for tablets</item>
-        <item>And many more!</item>
-    </string-array>
+
 
     <string name="recorder_permissions_toast">You have denied necessary permissions for the recorder. To\u00A0enable\u00A0go\u00A0to\u00A0Settings\u00A0>\u00A0Permissions.</string>
 
     <string name="legal_title">Legal Info</string>
-    <string name="legal_project_hint">This project has been financed by the German music promotion program “Neustart Kultur“ by the GVL (Gesellschaft zur Verwertung von Leistungsschutzrechten mbH)</string>
+    <string name="legal_project_hint">The initial setup of this project was financed by the German music promotion program “Neustart Kultur“ by the GVL (Gesellschaft zur Verwertung von Leistungsschutzrechten mbH)</string>
     <string name="publisher">Publisher</string>
-    <string name="legal_text">Javier Carbone (Freelance)\nJakob Felder Weg 36\n55128, Mainz, Germany\npracticetimeapp@gmail.com</string>
+    <string name="legal_text">PracticeTime! Project\npracticetimeapp@gmail.com</string>
     <string name="privacy_policy_title">Privacy policy</string>
-    <string name="privacy_policy">Practice Time! does not collect, share or store any personal Data.\n\nExceptions: When getting in contact with us through E-mail, we will remove your Personal Information from our records within 30 days. This information will not be shared.</string>
+    <string name="privacy_policy">The App "Practice Time!" stores data into a local database. This data is not shared by the app and stays local.</string>
     <string name="help_tutorial_title">Tutorial</string>
     <string name="licences_title">Open source licences</string>
-    <string name="donations_button_text">Donate 🤍</string>
+
     <string name="about_app_title">About the app</string>
     <string name="concept_title">Concept</string>
-    <string name="concept_text">Javier Carbone</string>
+    <string name="concept_text">Javier Carbone Sarmiento</string>
     <string name="development_title">Design &amp; Development</string>
-    <string name="development_text">Matthias Emde\nMichael Prommersberger</string>
+    <string name="development_text">PracticeTime! Contributors</string>
+    <string name="development_github_url">https://github.com/PracticeTimeApp/PracticeTime</string>
     <string name="about_appicon_title">App Icon</string>
     <string name="about_appicon_text">Alejandra Contreras Westermeyer</string>
-    <string name="url_donate">https://ko-fi.com/practicetime</string>
+
 
     <string name="lib1_name">MPAndroidChart</string>
     <string name="lib1_author">By Philipp Jahoda</string>
@@ -258,6 +266,14 @@
     <string name="lib2_name">AppIntro</string>
     <string name="lib2_author">By AppIntro Developers</string>
     <string name="lib2_link">https://github.com/AppIntro/AppIntro</string>
+
+    <string name="lib3_name">Android Jetpack &amp; AndroidX</string>
+    <string name="lib3_author">By Google / Android Open Source Project</string>
+    <string name="lib3_link">https://developer.android.com/jetpack</string>
+
+    <string name="lib4_name">Kotlin Coroutines</string>
+    <string name="lib4_author">By JetBrains</string>
+    <string name="lib4_link">https://github.com/Kotlin/kotlinx.coroutines</string>
     <string name="backup_and_restore"><![CDATA[Backup & Restore]]></string>
     <string name="export_sessions">Export Sessions</string>
     <string name="export_csv_dialog_text">Export all your Sessions to a CSV file. This file can be opened with spreadsheet programs like LibreOffice Calc or Microsoft Excel.</string>

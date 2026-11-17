@@ -1,8 +1,5 @@
 /*
  * This software is licensed under the MIT license
- *
- * Copyright (c) 2022, Javier Carbone, author Matthias Emde
- * Additions and modifications, author Michael Prommersberger
  */
 
 package de.practicetime.practicetime.ui.goals
@@ -21,6 +18,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -261,6 +259,9 @@ class GoalsFragment : Fragment(R.layout.fragment_goals) {
                     R.id.goalsToolbarArchivedGoals -> {
                         val i = Intent(requireActivity(), ArchivedGoalsActivity::class.java)
                         startActivity(i)
+                    }
+                    R.id.goalsToolbarNotes -> {
+                        findNavController().navigate(R.id.notesFragment)
                     }
                 }
             }

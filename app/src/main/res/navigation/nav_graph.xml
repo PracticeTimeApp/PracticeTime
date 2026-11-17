@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     This software is licensed under the MIT license
-
-    Copyright (c) 2022, Javier Carbone, author Michael Prommersberger
 -->
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -35,4 +33,8 @@
         android:name="de.practicetime.practicetime.ui.library.LibraryFragment"
         android:label="Library"
         tools:layout="@layout/fragment_library" />
+    <fragment
+        android:id="@+id/notesFragment"
+        android:name="de.practicetime.practicetime.ui.notes.NotesFragment"
+        android:label="Notes" />
 </navigation>

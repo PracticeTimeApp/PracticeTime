@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     This software is licensed under the MIT license
-
-    Copyright (c) 2022, Javier Carbone, author Michael Prommersberger
-    Additions and modifications, author Matthias Emde
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -91,10 +88,6 @@
             android:name=".ui.overflowitems.AboutActivity"
             android:exported="false"
             android:parentActivityName=".ui.MainActivity" />
-        <activity
-            android:name=".ui.overflowitems.DonationsActivity"
-            android:exported="false"
-            android:parentActivityName=".ui.overflowitems.AboutActivity" />
         <activity
             android:name=".ui.overflowitems.HelpActivity"
             android:exported="false"

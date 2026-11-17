@@ -1,7 +1,5 @@
 /*
  * This software is licensed under the MIT license
- *
- * Copyright (c) 2022, Javier Carbone, author Michael Prommersberger
  */
 
 package de.practicetime.practicetime.ui.overflowitems
@@ -81,10 +79,6 @@ class AboutActivity : AppCompatActivity() {
 
         findViewById<TextView>(R.id.about_tv_export_sessions).setOnClickListener {
             exportCSVDialog.show()
-        }
-
-        findViewById<TextView>(R.id.about_tv_support).setOnClickListener {
-            startActivity(Intent(this, DonationsActivity::class.java))
         }
 
         findViewById<TextView>(R.id.about_tv_legal).setOnClickListener {

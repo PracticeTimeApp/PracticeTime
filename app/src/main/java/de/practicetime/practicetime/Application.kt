@@ -1,8 +1,5 @@
 /*
  * This software is licensed under the MIT license
- *
- * Copyright (c) 2022, Javier Carbone, author Matthias Emde
- * Additions and modifications, author Michael Prommersberger
  */
 
 package de.practicetime.practicetime
@@ -19,9 +16,11 @@ import androidx.annotation.ColorInt
 import androidx.room.Room
 import de.practicetime.practicetime.database.PTDatabase
 import de.practicetime.practicetime.database.PTDatabaseMigrationOneToTwo
+import de.practicetime.practicetime.database.PTDatabaseMigrationTwoToThree
 import de.practicetime.practicetime.database.daos.CategoryDao
 import de.practicetime.practicetime.database.daos.GoalDescriptionDao
 import de.practicetime.practicetime.database.daos.GoalInstanceDao
+import de.practicetime.practicetime.database.daos.NoteDao
 import de.practicetime.practicetime.database.daos.SectionDao
 import de.practicetime.practicetime.database.daos.SessionDao
 import java.io.File
@@ -52,6 +51,7 @@ class PracticeTime : Application() {
         lateinit var goalInstanceDao: GoalInstanceDao
         lateinit var sessionDao: SessionDao
         lateinit var sectionDao: SectionDao
+        lateinit var noteDao: NoteDao
 
         var noSessionsYet = true
         var serviceIsRunning = false
@@ -69,7 +69,8 @@ class PracticeTime : Application() {
                 PTDatabase::class.java,
                 DATABASE_NAME
             ).addMigrations(
-                PTDatabaseMigrationOneToTwo
+                PTDatabaseMigrationOneToTwo,
+                PTDatabaseMigrationTwoToThree
             ).build()
                 .also {
                     categoryDao = it.categoryDao
@@ -77,6 +78,7 @@ class PracticeTime : Application() {
                     goalInstanceDao = it.goalInstanceDao
                     sessionDao = it.sessionDao
                     sectionDao = it.sectionDao
+                    noteDao = it.noteDao
                 }
 
             dbFile = applicationContext.getDatabasePath(DATABASE_NAME)
