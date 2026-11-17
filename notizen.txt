@@ -1,2 +1,0 @@
-$env:ANDROID_PREFS_ROOT=$null; .\gradlew --stop; Remove-Item -Recurse -Force app\build -ErrorAction SilentlyContinue; .\gradlew assembleDebug
-git reset --hard origin/master
