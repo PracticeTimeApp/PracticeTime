@@ -1,2 +1,8 @@
 $env:ANDROID_PREFS_ROOT=$null; .\gradlew --stop; Remove-Item -Recurse -Force app\build -ErrorAction SilentlyContinue; .\gradlew assembleDebug
 git reset --hard origin/master
+
+
+
+TODO in notes-feature
+Some of the new files in this branch still have the old copyright information with names. Update.
+Write Changes for 1.4.0

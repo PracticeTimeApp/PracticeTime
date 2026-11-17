@@ -48,6 +48,14 @@
                 android:id="@+id/layout_license_lib2"
                 layout="@layout/listitem_license" />
 
+            <include
+                android:id="@+id/layout_license_lib3"
+                layout="@layout/listitem_license" />
+
+            <include
+                android:id="@+id/layout_license_lib4"
+                layout="@layout/listitem_license" />
+
         </LinearLayout>
 
     </ScrollView>

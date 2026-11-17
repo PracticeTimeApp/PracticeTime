@@ -28,44 +28,29 @@ class LicenseActivity : AppCompatActivity() {
             title = getString(R.string.licences_title)
         }
 
-        val lib1 = findViewById<LinearLayout>(R.id.layout_license_lib1)
-        val tvName1 = lib1.findViewById<TextView>(R.id.tv_license_name)
-        val tvAuthor1 = lib1.findViewById<TextView>(R.id.tv_license_author)
+        setupLicenseItem(R.id.layout_license_lib1, R.string.lib1_name, R.string.lib1_author, R.string.lib1_link, "LICENSE_APACHE-2.0.txt")
+        setupLicenseItem(R.id.layout_license_lib2, R.string.lib2_name, R.string.lib2_author, R.string.lib2_link, "LICENSE_APACHE-2.0.txt")
+        setupLicenseItem(R.id.layout_license_lib3, R.string.lib3_name, R.string.lib3_author, R.string.lib3_link, "LICENSE_APACHE-2.0.txt")
+        setupLicenseItem(R.id.layout_license_lib4, R.string.lib4_name, R.string.lib4_author, R.string.lib4_link, "LICENSE_APACHE-2.0.txt")
+    }
 
-        tvName1.text = getString(R.string.lib1_name)
-        tvAuthor1.text = getString(R.string.lib1_author)
+    private fun setupLicenseItem(layoutId: Int, nameRes: Int, authorRes: Int, linkRes: Int, licenseFile: String) {
+        val layout = findViewById<LinearLayout>(layoutId) ?: return
+        val tvName = layout.findViewById<TextView>(R.id.tv_license_name)
+        val tvAuthor = layout.findViewById<TextView>(R.id.tv_license_author)
 
-        lib1.setOnClickListener {
+        tvName.text = getString(nameRes)
+        tvAuthor.text = getString(authorRes)
+
+        layout.setOnClickListener {
             val items = arrayOf<CharSequence>("View website", "View license")
             AlertDialog.Builder(this)
-                .setTitle(tvName1.text)
+                .setTitle(tvName.text)
                 .setItems(items) { _, which ->
                     if (which == 0) {
-                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.lib1_link))))
+                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(linkRes))))
                     } else if (which == 1) {
-                        showLicenseText("LICENSE_APACHE-2.0.txt")
-                    }
-                }
-                .show()
-        }
-
-
-        val lib2 = findViewById<LinearLayout>(R.id.layout_license_lib2)
-        val tvName2 = lib2.findViewById<TextView>(R.id.tv_license_name)
-        val tvAuthor2 = lib2.findViewById<TextView>(R.id.tv_license_author)
-
-        tvName2.text = getString(R.string.lib2_name)
-        tvAuthor2.text = getString(R.string.lib2_author)
-
-        lib2.setOnClickListener {
-            val items = arrayOf<CharSequence>("View website", "View license")
-            AlertDialog.Builder(this)
-                .setTitle(tvName2.text)
-                .setItems(items) { _, which ->
-                    if (which == 0) {
-                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.lib2_link))))
-                    } else if (which == 1) {
-                        showLicenseText("LICENSE_APACHE-2.0.txt")
+                        showLicenseText(licenseFile)
                     }
                 }
                 .show()
