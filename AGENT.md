@@ -11,7 +11,7 @@ PracticeTime! is an offline-first Android application for musicians to track the
 
 ## 2. Tech Stack
 - **Language**: Kotlin 1.9.23
-- **Build System**: Gradle 8.7 / AGP 8.4.0 (`namespace = "de.practicetime.practicetime"`, `buildConfig = true`). Current app version: **1.3.1** (`versionCode 19`).
+- **Build System**: Gradle 8.7 / AGP 8.4.0 (`namespace = "de.practicetime.practicetime"`, `buildConfig = true`). Current app version: **1.4.0** (`versionCode 19`).
 - **UI**: Fragments (Jetpack Navigation `2.7.7`) + Activities (Material Components `1.11.0`).
 - **Architecture**: MVVM (Model-View-ViewModel).
 - **Persistence**: Room Database 2.6.1 (SQLite; exported schema in `app/schemas/`).
@@ -47,15 +47,15 @@ Single-module project (`:app`). Application class: `de.practicetime.practicetime
 - **Static Accessors**: `PracticeTime` (Application class) provides static access to DAOs (`sessionDao`, `sectionDao`, `categoryDao`, `goalDescriptionDao`, `goalInstanceDao`, `noteDao`) and common utilities.
 - **Broadcasting & Services**: `LocalBroadcastManager` is used for internal service communication between `RecorderService` and `ActiveSessionActivity`.
 
-## 5. Recent Version Changes (1.2.0, 1.3.0 & 1.3.1)
+## 5. Recent Version Changes (1.2.0, 1.3.0 & 1.4.0)
 - **Infrastructure (v1.2.0)**: Upgraded Gradle Wrapper (`7.2` -> `8.7`), AGP (`7.1.1` -> `8.4.0`), Kotlin (`1.6.10` -> `1.9.23`), and Room (`2.4.1` -> `2.6.1` to fix DAO `suspend` compilation). Moved package name to `namespace` property and enabled `buildConfig = true`.
 - **Edge-to-Edge (v1.2.0)**: Implemented Android 15 edge-to-edge support across 7 core activities (`MainActivity`, `ActiveSessionActivity`, `GoalStatsActivity`, `SessionStatsActivity`, `ArchivedGoalsActivity`, `FullscreenSessionActivity`, `ProgressUpdateActivity`). Adjusted bottom button bar layouts to `wrap_content` + `minHeight="56dp"`.
 - **Category Colors (v1.2.0)**: Expanded category colors from 10 to 20 (`category_color_11` to `20`), added 2 new `RadioGroup` rows to `dialog_add_or_change_category.xml`, and updated `CategoryDialog.kt` logic for mutually exclusive selection across all 20 options.
 - **Tuner (v1.2.0 / Feature Branch)**: Added a chromatic tuner fragment using autocorrelation.
 - **Git Maintenance (v1.2.0)**: Added `/release` and `/keystore` to `.gitignore`.
 - **Custom Beep Audio (v1.3.0)**: Replaced system `ToneGenerator` with `MediaPlayer` playing `res/raw/custom_beep.mp3` in `TimerFragment.kt`, ensuring resource cleanup via `setOnCompletionListener { it.release() }`.
-- **Target SDK (v1.2.0, v1.3.0 & v1.3.1)**: Updated `compileSdk` and `targetSdk` from `34` -> `35` in v1.2.0, and from `35` -> `36` in v1.3.0/v1.3.1 to comply with Google Play Console requirements.
-- **Notes Feature (v1.3.1)**: Integrated local notes management (`Note` entity, `NoteDao`, database migration v2 -> v3). Fixed database update persistence by direct entity mutation (preventing Kotlin `data class .copy()` primary key loss). Implemented read-only view mode upon opening notes with an "Edit" button to toggle edit mode, ensuring font styling and contrast remain identical across view and edit states.
+- **Target SDK (v1.2.0, v1.3.0 & v1.4.0)**: Updated `compileSdk` and `targetSdk` from `34` -> `35` in v1.2.0, and from `35` -> `36` in v1.3.0/v1.4.0 to comply with Google Play Console requirements.
+- **Notes Feature & Open Source Disclosures (v1.4.0)**: Integrated local notes management (`Note` entity, `NoteDao`, database migration v2 -> v3). Fixed database update persistence by direct entity mutation. Implemented read-only view mode upon opening notes with an "Edit" button to toggle edit mode, ensuring font contrast remains identical. Attributed core dependencies in `LicenseActivity` (MPAndroidChart, AppIntro, Android Jetpack/AndroidX, Kotlin Coroutines). Updated About screen concept creator to "Javier Carbone Sarmiento", financing text, and clickable GitHub link (`https://github.com/PracticeTimeApp/PracticeTime`). Modernized header comments to standard MIT license headers.
 
 ## 6. Development Rules for Agents
 1. **Feature Isolation & Non-Regression**: When working on a specific app feature, take maximum care and priority in not affecting negatively any other feature of the app.
@@ -74,4 +74,4 @@ Single-module project (`:app`). Application class: `de.practicetime.practicetime
 - **Transitive Resources**: `android.nonTransitiveRClass=false` is set in `gradle.properties` to ensure resource resolution consistency in this legacy codebase.
 
 ---
-*Refer to `Docs/Changes-1.2.0.md`, `Docs/Changes-1.3.0.md`, and `Docs/database.md` for chronological history and database architecture.*
+*Refer to `Docs/Changes-1.2.0.md`, `Docs/Changes-1.3.0.md`, `Docs/Changes-1.4.0.md`, and `Docs/database.md` for chronological history and database architecture.*
